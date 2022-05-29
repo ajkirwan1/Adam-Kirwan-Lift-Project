@@ -9,12 +9,12 @@ of the importData function in the main program (line 22).
 Output: 
 The data is outputted in the file named Output.csv. The desired output location should be given in the string variable outputPath which is an attribute of the
 FileControl
-Class. Ten columns are found in the output file. 1) Current Floor: the lift's current location; 2) Collection/Drop-off: has the lift collected or delivered an
-employee to this location; 3) Time: the current time in seconds; 4) Moving Up Stops: the list of stops to be made by the lift when its trajectory is upwards; 5) Moving
-Down Stops: the list of stops to be made by the lift when its trajectory is downwards; 6) Lift Trajectory: the lift's current trajectory, up or down; 7) Stop Order:
-this combines columns 4 and 5 and arranges them into the pojected stopping order based on the lift's trajectory; 8) Employee IDs in Lift: which employees are currently
-in the lift. 9) Journey Completed by: the IDs of employees who have arrived at their destination; 10) No. of Employees in Lift: the number of employees currently
-in the lift.
+Class. Ten columns are found in the output file. 1) Current Floor: the lift's current location; 2) Collection/Drop-off: has the lift collected (delivered) an
+employee at (to) this location; 3) Time: the current time in seconds; 4) Moving Up Stops: the list of stops to be made by the lift when its trajectory is upwards; 5)
+Moving Down Stops: the list of stops to be made by the lift when its trajectory is downwards; 6) Lift Trajectory: the lift's current trajectory, up or down; 7) Stop 
+Order: this combines columns 4 and 5 and arranges them into the pojected stopping order based on the lift's trajectory; 8) Employee IDs in Lift: which employees are 
+currently in the lift. 9) Journey Completed by: the IDs of employees who have arrived at their destination; 10) No. of Employees in Lift: the number of employees
+currently in the lift.
 
 The program operates on the basis given in the initial proposal outlined at stage 1. This is now summerised below. 
 
@@ -33,7 +33,6 @@ location.
 
 This means that the lift handles and responds to requests based on whether the floor requested to enter or leave the lift is above or below the lift's current
 location. 
-
 
 Assumptions made in the program:
 In additon to the assumption that the lift takes 10 seconds to move between floors, other assumptions have been made. First, it is assumed that entry/exit of an
