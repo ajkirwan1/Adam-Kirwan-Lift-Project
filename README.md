@@ -25,7 +25,7 @@ The program operates on the basis given in the initial proposal outlined at stag
 location.
 6) Requests made above the lift's location are placed into a moving-up list. Requests made below the lift's location are placed into a moving-down list.
 7) If the lift's trajectory is up, the moving-up list is used to handle requests. If the lift's trajectory is down, the moving-up list is used to handle requests.
-8) The lift moves in steps of one floor and 10 seconds increments.
+8) The lift moves in steps of one floor and increments of 10 seconds.
 9) The destination of the employee is only known (processed) upon entry to the lift.
 10) After each step (one floor; 10 seconds), all calls for the lift made within the last 10 seconds are processed and added to the appropriate list (discussed above).
 11) After each step (one floor; 10 seconds), the lift first allows employees to leave, and then allows employees to enter from the lift's current location.
