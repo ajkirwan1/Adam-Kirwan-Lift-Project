@@ -10,18 +10,18 @@ namespace Adam_Kirwan_Lift_Project
     class Program
     {
         /* This is the main program. It first creates an empty list of employees which is subsequently filled with employee objects from the Cloud Software Engineer 
-         * Coding Exercise Data CSV file. The time is initialised to 0. Two objects are instantiated: a Lift object, and a FileControl object. 
-         */
-        public static List<Employee> mblah = new List<Employee>() { };
+         * Coding Exercise Data CSV file. The time is initialised to 0. Two objects are instantiated: a Lift object, and a FileControl object.*/
+
+        public static List<Employee> employee = new List<Employee>() { };
         static void Main(string[] args)
         {
             int time = 0;
             Lift lift = new Lift();
             FileControl file = new FileControl(time, lift.currentLocation, lift.stoppedHere, lift.movingUpint, lift.movingDownint, lift.liftTrajectory, lift.listOfRequests, lift.liftMovingUp, lift.combinedList, lift.noInLift);
 
-            file.importData();
-            File.WriteAllText(@"C:/Users/Adam/source/repos/Adam Kirwan Lift Project/TestFile.csv", lift.header);
-            int NoOfEmployees = mblah.Count;
+            file.importData("C:/Users/Adam/source/repos/Lift/Lift/Cloud Software Engineer Coding Exercise Data.csv");
+            File.WriteAllText(file.outputPath, lift.header);
+            int NoOfEmployees = employee.Count;
 
             while (lift.listOfRequests.Count == 0)
             {

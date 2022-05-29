@@ -84,10 +84,10 @@ namespace Adam_Kirwan_Lift_Project
          *are removed from the employeeList list. */
         {
 
-            if (Program.mblah.Count > 0)
+            if (Program.employee.Count > 0)
             {
                 int count = 0;
-                foreach (Employee i in Program.mblah)
+                foreach (Employee i in Program.employee)
                 {
                     if (i.time_requested <= time)
                     {
@@ -96,7 +96,7 @@ namespace Adam_Kirwan_Lift_Project
                         count += 1;
                     }
                 }
-                Program.mblah.RemoveRange(0, count);
+                Program.employee.RemoveRange(0, count);
             }
         }
 

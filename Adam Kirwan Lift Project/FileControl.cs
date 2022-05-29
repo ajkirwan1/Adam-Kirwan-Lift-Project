@@ -8,32 +8,32 @@ using System.Threading.Tasks;
 namespace Adam_Kirwan_Lift_Project
 {
     class FileControl
-    {
+        {
+
+        /* This Class contains one attribute: outputPath. The desired path/location of the output should be placed here as a string. 
+         * This Class also contains two mnethods. The importData method takes one string argument to specify the path/location of 
+         * the Cloud Software Engineer Coding Exercise Data.csv file. The WriteCSVLine method handles writing to the CSV file. No user changes are needed 
+         * to WriteCSVLine */
+
+
+        // The output path location should be inputted below in the variable outputPath
+        public string outputPath = "C:/Users/Adam/source/repos/Adam Kirwan Lift Project/Output.csv";
 
         public FileControl(int time, int currentLocation, bool stoppedHere, List<int> movingUpint, List<int> movingDownint, string liftTrajectory, List<Employee> listOfRequests, bool liftMovingUp, string combinedList, int noInLift) { }
-        public void createTempList()
+
+        public void importData(string inputPath)
         {
-            string path = "C:/Users/Adam/source/repos/Lift/Lift/Cloud Software Engineer Coding Exercise Data.csv";
-            string[] lines = System.IO.File.ReadAllLines(path);
-            System.IO.File.WriteAllLines(@"C:/Users/Adam/source/repos/Lift/Lift/ListCopy.txt", lines);
-        }
-
-
-
-        public void importData()
-        {
-            string path = "C:/Users/Adam/source/repos/Lift/Lift/Cloud Software Engineer Coding Exercise Data.csv";
-            string[] lines = System.IO.File.ReadAllLines(path);
+            // The importData method takes a single string argument to specify the location of Cloud Software Engineer Coding Exercise Data.csv.
+            // The argument is addded in the main program (line 22).
+            string[] lines = System.IO.File.ReadAllLines(inputPath);
 
             for (int i = 1; i < lines.Length; i++)
             {
-                //Console.WriteLine(lines[i]);
                 string[] sub_string = lines[i].Split(',');
                 Employee ob = new Employee() { id = Int32.Parse(sub_string[0]), location = Int32.Parse(sub_string[1]), destination = Int32.Parse(sub_string[2]), time_requested = Int32.Parse(sub_string[3]) };
-                Program.mblah.Add(ob);
+                Program.employee.Add(ob);
             }
         }
-
 
         public void WriteCSVLine(int time, int currentLocation, bool stoppedHere, List<int> movingUpint, List<int> movingDownint, string liftTrajectory, List<Employee> listOfRequests, bool liftMovingUp, string combinedList, int noInLift)
         {
@@ -73,14 +73,7 @@ namespace Adam_Kirwan_Lift_Project
             }
 
             string e = "\n" + lifttLocation + liftStoppedHere + currentTime + movingUpCalls + movingDownCalls + trajectory + combinedList + IDsInLift + completedJourney + noInLift;
-            File.AppendAllText(@"C:/Users/Adam/source/repos/Adam Kirwan Lift Project/TestFile.csv", e);
-
+            File.AppendAllText(outputPath, e);
         }
-
-
-
-
-
-
     }
 }
