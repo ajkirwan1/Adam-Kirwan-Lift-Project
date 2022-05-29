@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 namespace Adam_Kirwan_Lift_Project
 {
     class Lift
-    {
+        {
+        /* The Class contains the bulk of the code. Multiple data types and lists are used to hold information such as the current position (floor)
+         * of the lift, the trajectory of the lift, no of employees in the lift, etc. 
+         * As outlined in the Readme file, the trajectory of the lift at any one momentis either up or down. As such, two lists are used to store 
+         * the lift's target floors: movingUpint and movingDownint. The employee list 'listOfRequests'is initially empty, but is added to every 
+         * time an employee makes a request for the lift.*/
+
         int[] previousStops = { };
         public bool liftInUse = false;
         public bool liftMovingUp = true;
@@ -27,6 +33,8 @@ namespace Adam_Kirwan_Lift_Project
 
 
         public void move()
+        /* This method is called in the main Program. It controls the direction of motion of the lift. The method assess the lift's current trajectory, current location,
+         * and the next stop, and uses this information to move the lift up one floor or down one floor. */
         {
             if (movingUpint.Count != 0 || movingDownint.Count != 0)
             {
@@ -69,6 +77,11 @@ namespace Adam_Kirwan_Lift_Project
         }
 
         public void CheckExternalRequest(int time)
+        /* This method checks requests made external to the lift, i.e., on a floor. It is called in the method liftEvent (Lift Class) to check if an employee
+         * has requested the lift. It does this by checking each employee in the EmployeeList list to see which employees have requested the lift since the last
+         * time increment of 10 seconds. For each request made, the employee object is added to the listOfRequests list. Each employee object is then passed to the 
+         * appendToMovingUpORDownint list, which itself seperates requests into the lists movingUpint or movingDownint. Finally, the employee objects who have requested the lift
+         *are removed from the employeeList list. */
         {
 
             if (Program.mblah.Count > 0)
@@ -88,6 +101,8 @@ namespace Adam_Kirwan_Lift_Project
         }
 
         public void CheckBoardingLift()
+        /* This method is called each time the lift's location is equal to the 0th element in the appropriate list of requested stops (movingUpint or movingDownint). 
+         * This method handles employees who move into the lift. It ensures that no more than eight employees can be in the lift at any given time. */
         {
             if (noInLift < 8)
             {
@@ -120,6 +135,8 @@ namespace Adam_Kirwan_Lift_Project
 
         }
         public void CheckLeavingLift()
+        /* This method is called each time the lift's location is equal to the 0th element in the appropriate list of requested stops (movingUpint or movingDownint).
+         * This method identifies employees who are in the lift and are exiting the onto the current floor.*/
         {
             foreach (Employee i in listOfRequests)
             {
@@ -139,6 +156,10 @@ namespace Adam_Kirwan_Lift_Project
         }
 
         public void appendToMovingUpORDownint(Employee person, int x)
+        /* This method assess to which list an employee's request is added. It takes two arguments: 1) An employee object, and 2) an int value x. 
+         * The value x is 1 when the request passed to this method is made external to the lift (the employee's initial/starting location). The value of x is 2
+         * when the request passed to this method is the employees destination, which is made upon the employee entering the lift. This method partitions the 
+         * requests into either the movingUpint or movingDownint lists, depending on whether the floor request is above or below the lift's current location. */
         {
             if (x == 1)
             {
@@ -172,6 +193,10 @@ namespace Adam_Kirwan_Lift_Project
         }
 
         public bool determineIfLiftMovingUpOrDown()
+        /* This method determines whether the lift should move up or down. Crudely, if the movingUpint list containts elements and the movingDownint list does not,
+         * the lift's trajectory is set as up. Conversely, if the movingDownint list containts elements and the movingUpint list does not, the trajectory is set as down.
+         * If no list contains elements, the list is set as stationary. If both movingUpint and movingDownint contain elements, an assessment is made with respect 
+         * to the lift's location history.*/
         {
             if (movingUpint.Count == 0 && movingDownint.Count > 0)
             {
@@ -214,9 +239,14 @@ namespace Adam_Kirwan_Lift_Project
             return liftMovingUp;
         }
 
-        public int moveLift(int time)
+        public int liftAction(int time)
+        /* This is the main method of the Lift Class. It is called in the main program. Each time it is called, a check of external requests (those not in the lift) for
+         * the lift are assessed. Next, it uses the lift's current trajectory to determine where to stop. For instance, if the 
+         * lift is moving up, the lift's current location is compared to the 0th element of the list of stops in the movingUpint list. If the lift is moving down, 
+         * the lift's current location is compared to the 0th element of the list of stops in the movingDownint list. Each time the lift's location is equal to either of
+         * these 0th elements, the lift stops. Employees in the lift can then leave, then and employees on the floor can enter. This stop is then removed from the given
+         * list. */
         {
-            Console.WriteLine("Lift is curretnly moving upwards?: " + determineIfLiftMovingUpOrDown());
             while (liftInUse == true)
             {
                 CheckExternalRequest(time);
@@ -226,15 +256,12 @@ namespace Adam_Kirwan_Lift_Project
 
 
 
-                    Console.WriteLine("movingUpint.Count != 0 || movingDownint.Count != 0");
                     if (liftMovingUp == true && currentLocation != movingUpint[0])
                     {
-                        Console.WriteLine("liftMovingUp == true && currentLocation != movingUpint[0]");
                         stoppedHere = false;
                     }
                     else if (liftMovingUp == true && currentLocation == movingUpint[0])
                     {
-                        Console.WriteLine("liftMovingUp == true && currentLocation == movingUpint[0] ");
                         stoppedHere = true;
                         CheckLeavingLift();
                         CheckBoardingLift();
@@ -242,12 +269,10 @@ namespace Adam_Kirwan_Lift_Project
                     }
                     else if (liftMovingUp == false && currentLocation != movingDownint[0])
                     {
-                        Console.WriteLine("liftMovingUp == false && currentLocation != movingDownint[0]");
                         stoppedHere = false;
                     }
                     else if (liftMovingUp == false && currentLocation == movingDownint[0])
                     {
-                        Console.WriteLine("liftMovingUp == false && currentLocation == movingDownint[0]");
                         stoppedHere = true;
                         CheckLeavingLift();
                         CheckBoardingLift();
@@ -262,11 +287,7 @@ namespace Adam_Kirwan_Lift_Project
                 liftHistory.Add(currentLocation);
                 liftInUse = false;
             }
-            Console.WriteLine("Time +10 seconds  .........");
             return time;
         }
-
-
-
     }
 }

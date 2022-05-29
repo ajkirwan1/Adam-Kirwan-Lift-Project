@@ -73,7 +73,6 @@ namespace Adam_Kirwan_Lift_Project
             }
 
             string e = "\n" + lifttLocation + liftStoppedHere + currentTime + movingUpCalls + movingDownCalls + trajectory + combinedList + IDsInLift + completedJourney + noInLift;
-            Console.WriteLine(e);
             File.AppendAllText(@"C:/Users/Adam/source/repos/Adam Kirwan Lift Project/TestFile.csv", e);
 
         }
