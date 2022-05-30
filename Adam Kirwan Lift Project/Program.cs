@@ -26,6 +26,10 @@ namespace Adam_Kirwan_Lift_Project
             while (lift.listOfRequests.Count == 0)
             {
                 lift.CheckExternalRequest(time);
+                if (lift.listOfRequests.Count != 0)
+                {
+                    break;
+                }
                 time += 1;
             }
 

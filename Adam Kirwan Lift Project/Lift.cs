@@ -9,8 +9,8 @@ namespace Adam_Kirwan_Lift_Project
     class Lift
         {
         /* The Class contains the bulk of the code. Multiple data types and lists are used to hold information such as the current position (floor)
-         * of the lift, the trajectory of the lift, no of employees in the lift, etc. 
-         * As outlined in the Readme file, the trajectory of the lift at any one momentis either up or down. As such, two lists are used to store 
+         * of the lift, the trajectory of the lift, no. of employees in the lift, etc. 
+         * As outlined in the Readme file, the trajectory of the lift at any one moment is either up or down. As such, two lists are used to store 
          * the lift's target floors: movingUpint and movingDownint. The employee list 'listOfRequests'is initially empty, but is added to every 
          * time an employee makes a request for the lift.*/
 
@@ -33,7 +33,7 @@ namespace Adam_Kirwan_Lift_Project
 
 
         public void move()
-        /* This method is called in the main Program. It controls the direction of motion of the lift. The method assess the lift's current trajectory, current location,
+        /* This method is called in the main Program. It controls the motion of the lift. The method assess the lift's current trajectory, current location,
          * and the next stop, and uses this information to move the lift up one floor or down one floor. */
         {
             if (movingUpint.Count != 0 || movingDownint.Count != 0)
@@ -78,7 +78,7 @@ namespace Adam_Kirwan_Lift_Project
 
         public void CheckExternalRequest(int time)
         /* This method checks requests made external to the lift, i.e., on a floor. It is called in the method liftEvent (Lift Class) to check if an employee
-         * has requested the lift. It does this by checking each employee in the EmployeeList list to see which employees have requested the lift since the last
+         * has requested the lift. It does this by checking each employee in the employeeList list to see which employees have requested the lift since the last
          * time increment of 10 seconds. For each request made, the employee object is added to the listOfRequests list. Each employee object is then passed to the 
          * appendToMovingUpORDownint list, which itself seperates requests into the lists movingUpint or movingDownint. Finally, the employee objects who have requested the lift
          *are removed from the employeeList list. */
@@ -158,7 +158,7 @@ namespace Adam_Kirwan_Lift_Project
         public void appendToMovingUpORDownint(Employee person, int x)
         /* This method assess to which list an employee's request is added. It takes two arguments: 1) An employee object, and 2) an int value x. 
          * The value x is 1 when the request passed to this method is made external to the lift (the employee's initial/starting location). The value of x is 2
-         * when the request passed to this method is the employees destination, which is made upon the employee entering the lift. This method partitions the 
+         * when the request passed to this method is the employee's destination, which is made upon the employee entering the lift. This method partitions the 
          * requests into either the movingUpint or movingDownint lists, depending on whether the floor request is above or below the lift's current location. */
         {
             if (x == 1)
@@ -193,7 +193,7 @@ namespace Adam_Kirwan_Lift_Project
         }
 
         public bool determineIfLiftMovingUpOrDown()
-        /* This method determines whether the lift should move up or down. Crudely, if the movingUpint list containts elements and the movingDownint list does not,
+        /* This method determines whether the lift should move up or down. If the movingUpint list containts elements and the movingDownint list does not,
          * the lift's trajectory is set as up. Conversely, if the movingDownint list containts elements and the movingUpint list does not, the trajectory is set as down.
          * If no list contains elements, the list is set as stationary. If both movingUpint and movingDownint contain elements, an assessment is made with respect 
          * to the lift's location history.*/
@@ -250,12 +250,8 @@ namespace Adam_Kirwan_Lift_Project
             while (liftInUse == true)
             {
                 CheckExternalRequest(time);
-
                 if (movingUpint.Count != 0 || movingDownint.Count != 0)
                 {
-
-
-
                     if (liftMovingUp == true && currentLocation != movingUpint[0])
                     {
                         stoppedHere = false;
